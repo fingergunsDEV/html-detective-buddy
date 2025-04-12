@@ -34,23 +34,6 @@
     --ring: 224.3 76.3% 48%;
 
     --radius: 0.5rem;
-
-    /* Code highlighting colors */
-    --code-highlight: 222 47% 11%;
-    --code-text: 210 40% 98%;
-    --code-tag: 330 65% 70%;
-    --code-attribute: 130 50% 60%;
-    --code-string: 40 70% 60%;
-    --code-number: 200 70% 60%;
-    --code-comment: 220 20% 50%;
-    --code-keyword: 280 65% 70%;
-    --code-function: 220 70% 70%;
-    
-    /* Debug colors */
-    --debug-error: 0 90% 60%;
-    --debug-warning: 40 90% 60%;
-    --debug-info: 200 90% 60%;
-    --debug-success: 130 60% 50%;
   }
 }
 
@@ -89,17 +72,4 @@
 }
 .token.function {
   @apply text-code-function;
-}
-
-/* Animation for loading state */
-@keyframes pulse-subtle {
-  0%, 100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.5;
-  }
-}
-.animate-pulse-subtle {
-  animation: pulse-subtle 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }

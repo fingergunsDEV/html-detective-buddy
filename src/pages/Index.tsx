@@ -41,7 +41,7 @@ const Index = () => {
     }
 
     setAnalyzing(true);
-    // Small delay to show loading state
+    // Simulate processing time
     setTimeout(() => {
       try {
         // Basic HTML analysis
@@ -95,7 +95,7 @@ const Index = () => {
       } finally {
         setAnalyzing(false);
       }
-    }, 500);
+    }, 1000);
   };
 
   const clearAll = () => {
@@ -195,7 +195,7 @@ const Index = () => {
           <p className="text-muted-foreground">
             The HTML Render Debug Assistant helps identify issues in your HTML, CSS, JavaScript, and Google Analytics implementation.
             It can detect common problems like unclosed tags, deprecated elements, and accessibility issues.
-            URL analysis will fetch the HTML content from websites through our proxy server, providing a complete debugging experience without CORS limitations.
+            For full URL analysis capabilities, additional server-side components would be required to bypass CORS limitations.
           </p>
         </div>
       </main>

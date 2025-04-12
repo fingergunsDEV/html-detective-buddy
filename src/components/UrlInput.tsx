@@ -4,7 +4,6 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { toast } from "@/components/ui/use-toast";
-import { fetchUrlContent } from "@/services/ProxyService";
 
 interface UrlInputProps {
   onFetch: (url: string, htmlContent: string) => void;
@@ -24,18 +23,29 @@ const UrlInput: React.FC<UrlInputProps> = ({ onFetch }) => {
       return;
     }
 
+    // Add protocol if missing
+    let fetchUrl = url;
+    if (!url.startsWith("http://") && !url.startsWith("https://")) {
+      fetchUrl = "https://" + url;
+    }
+
     setLoading(true);
     try {
-      // Use our proxy service to fetch the URL content
-      const htmlContent = await fetchUrlContent(url);
+      // This would need a proxy server in production
+      // For now, we'll use a mock response
+      setTimeout(() => {
+        setLoading(false);
+        toast({
+          title: "URL Analysis Limited",
+          description: "Due to CORS limitations, the URL feature requires backend implementation. Please paste the HTML directly for now.",
+        });
+      }, 1500);
       
-      // Call the callback with the URL and HTML content
-      onFetch(url, htmlContent);
-      
-      toast({
-        title: "URL Fetched Successfully",
-        description: `Fetched content from ${url}`,
-      });
+      // In a real implementation, we would fetch the HTML like this:
+      // const response = await fetch(`/api/proxy?url=${encodeURIComponent(fetchUrl)}`);
+      // if (!response.ok) throw new Error('Failed to fetch URL');
+      // const html = await response.text();
+      // onFetch(fetchUrl, html);
     } catch (error) {
       console.error("Error fetching URL:", error);
       toast({

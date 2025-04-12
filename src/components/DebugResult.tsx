@@ -100,7 +100,7 @@ const DebugResult: React.FC<DebugResultProps> = ({ issues, fixedCode, isLoading 
       <CardContent>
         <ScrollArea className="h-[240px] pr-4">
           {issues.map((issue, idx) => (
-            <div key={idx} className="mb-6">
+            <div key={idx} className="mb-4">
               <div className="flex items-start gap-2">
                 <div className="mt-1">{IconByType[issue.type]}</div>
                 <div className="flex-1">
@@ -111,24 +111,13 @@ const DebugResult: React.FC<DebugResultProps> = ({ issues, fixedCode, isLoading 
                     </p>
                   )}
                   {issue.code && (
-                    <div className="relative mt-2 mb-2">
-                      <Button 
-                        variant="outline" 
-                        size="sm" 
-                        className="absolute right-2 top-2 h-6 px-2 text-xs z-10"
-                        onClick={() => copyToClipboard(issue.code || '')}
-                      >
-                        <ClipboardCopy className="h-3 w-3 mr-1" />
-                        Copy
-                      </Button>
-                      <pre className="bg-code-highlight text-code-text p-3 pt-10 rounded text-xs overflow-x-auto whitespace-pre">
-                        {issue.code}
-                      </pre>
-                    </div>
+                    <pre className="bg-code-highlight text-code-text p-2 rounded text-xs my-2 overflow-x-auto">
+                      {issue.code}
+                    </pre>
                   )}
                   {issue.solution && (
-                    <div className="mt-2 text-sm bg-green-950/30 p-2 rounded border border-green-800/50">
-                      <span className="text-debug-success font-medium">Solution: </span>
+                    <div className="mt-1 text-sm">
+                      <span className="text-debug-success">Solution: </span>
                       {issue.solution}
                     </div>
                   )}
