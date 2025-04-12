@@ -23,7 +23,10 @@ export const useCodeAnalysis = () => {
   };
 
   const performAnalysis = (codeToAnalyze: string = code) => {
-    if (!codeToAnalyze.trim()) {
+    // Ensure codeToAnalyze is a string
+    const codeString = codeToAnalyze || '';
+    
+    if (!codeString.trim()) {
       toast({
         title: "No code to analyze",
         description: "Please enter HTML code or fetch a URL first.",
@@ -37,17 +40,17 @@ export const useCodeAnalysis = () => {
     setTimeout(() => {
       try {
         // Basic HTML analysis
-        const htmlAnalysisResult = analyzeHtml(codeToAnalyze);
+        const htmlAnalysisResult = analyzeHtml(codeString);
         
         // Google Analytics specific analysis if GA code is detected
         let allIssues = [...htmlAnalysisResult.issues];
-        if (codeToAnalyze.includes('google-analytics') || codeToAnalyze.includes('gtag')) {
-          const gaIssues = analyzeGoogleAnalytics(codeToAnalyze);
+        if (codeString.includes('google-analytics') || codeString.includes('gtag')) {
+          const gaIssues = analyzeGoogleAnalytics(codeString);
           allIssues = [...allIssues, ...gaIssues];
         }
         
         // Detect framework
-        const framework = detectFramework(codeToAnalyze);
+        const framework = detectFramework(codeString);
         if (framework) {
           allIssues.push({
             type: 'info',
